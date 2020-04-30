@@ -1,0 +1,14 @@
+{
+  "name": "live-chat-socket-io",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Berkhan <berkhanhalacoglu@hotmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Berkhann/Live-Chat-Socket-IO",
+  "dependencies": {
+    "angular": "^1.7.9",
+    "semantic": "^2.4.1"
+  }
+}
