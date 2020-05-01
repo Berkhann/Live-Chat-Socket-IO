@@ -1,4 +1,5 @@
 app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=>{
+    $scope.messages = [];
 
     $scope.init = ()=>{
         const username = prompt('Lütfen adınızı girin.');
@@ -14,7 +15,17 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
             reconnectionAttemps:3,
             reconnectionDelay:600
         }).then((socket)=>{
-            socket.emit('newUser',{username})
+            socket.emit('newUser',{username});
+
+            socket.on('newUser',(data)=>{
+                const messageData={
+                    type: 0,//info messages
+                    username:data.username
+                };
+
+            $scope.messages.push(messageData);
+            $scope.$apply();
+            });
         }).catch((err)=>{
             console.log(err);
         });
