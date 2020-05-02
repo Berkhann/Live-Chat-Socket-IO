@@ -39,6 +39,11 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
             });
 
 
+        socket.on('newMessage',(message)=>{
+            $scope.messages.push(message);
+            $scope.$apply();
+            scroolTop();
+        })
 
         socket.on('discUser',(user)=>{
             const messageData={
@@ -88,6 +93,14 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
             };
             $scope.messages.push(messageData);
             $scope.message = '';
+
+            socket.emit('newMessage',messageData);
+
+            sscroolTop();
+        }
+
+
+        function scroolTop(){
             setTimeout(()=>{
                 const element = document.getElementById('chat-area');
                 element.scrollTop = element.scrollHeight;

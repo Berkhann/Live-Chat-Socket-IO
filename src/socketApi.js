@@ -42,6 +42,10 @@ io.on('connection',(socket)=>{
             socketId: socket.id,
             x:data.x,
             y:data.y});
+    });
+
+    socket.on('newMessage',(data)=>{
+        socket.broadcast.emit('newMessage',data);
     })
 
 });
