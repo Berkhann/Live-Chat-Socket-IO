@@ -6,6 +6,9 @@ socketApi.io = io;
 
 const users = {};
 
+//Helpers
+const randomColor = require('../helpers/randomColor');
+
 io.on('connection',(socket)=>{
     console.log('Bir kullanıcı bağlandı.');
 
@@ -15,7 +18,8 @@ io.on('connection',(socket)=>{
             position:{
                 x:0,
                 y:0
-            }
+            },
+            color:randomColor()
         };
 
         const userData = Object.assign(data,defaultData);
@@ -29,6 +33,16 @@ io.on('connection',(socket)=>{
         socket.broadcast.emit('discUser',users[socket.id]);
         delete users[socket.id];
     });
+
+    socket.on('animate',(data)=>{
+        users[socket.id].position.x = data.x;
+        users[socket.id].position.y = data.y;
+
+        socket.broadcast.emit('animate',{
+            socketId: socket.id,
+            x:data.x,
+            y:data.y});
+    })
 
 });
 
