@@ -11,13 +11,17 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
             return false;
     }
 
+    
 
+    async function initSocket(username){
 
-    function initSocket(username){
-        indexFactory.connectSocket('http://localhost:3000',{
+        const connectionOptions = {
             reconnectionAttemps:3,
             reconnectionDelay:600
-        }).then((socket)=>{
+        };
+    try{
+        const socket = await indexFactory.connectSocket('http://localhost:3000',connectionOptions);
+
             socket.emit('newUser',{username});
 
             socket.on('initPlayers',(players)=>{
@@ -118,11 +122,13 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
             }, 2000);
         }
 
+        return{
+            connectSocket
+        }
 
-        }).catch((err)=>{
-            console.log(err);
-        });
+    }catch(err){
+        console.log(err);
     }
-
+    }
 
 }]);
