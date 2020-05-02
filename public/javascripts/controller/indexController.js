@@ -20,7 +20,7 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
             reconnectionDelay:600
         };
     try{
-        const socket = await indexFactory.connectSocket('http://localhost:3000',connectionOptions);
+        const socket = await indexFactory.connectSocket('https://socket-live-chat-bubbles.herokuapp.com',connectionOptions);
 
             socket.emit('newUser',{username});
 
