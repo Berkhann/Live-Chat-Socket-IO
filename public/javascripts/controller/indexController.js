@@ -86,8 +86,12 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
                 username:username,
                 text : message
             };
-        $scope.messages.push(messageData);
-        $scope.message = '';
+            $scope.messages.push(messageData);
+            $scope.message = '';
+            setTimeout(()=>{
+                const element = document.getElementById('chat-area');
+                element.scrollTop = element.scrollHeight;
+            });
         }
 
 
