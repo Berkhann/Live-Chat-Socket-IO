@@ -35,6 +35,7 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
                 };
             $scope.messages.push(messageData);
             $scope.players[data.id] =data;
+            scroolTop();
             $scope.$apply();
             });
 
@@ -56,6 +57,7 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
             };
             $scope.messages.push(messageData);
             delete  $scope.players[data.id];
+            scroolTop();
             $scope.$apply();
         });
 
